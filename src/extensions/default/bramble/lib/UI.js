@@ -12,6 +12,7 @@ define(function (require, exports, module) {
         BrambleEvents       = brackets.getModule("bramble/BrambleEvents"),
         BrambleStartupState = brackets.getModule("bramble/StartupState"),
         FileSystem          = brackets.getModule("filesystem/FileSystem"),
+        Sizes               = brackets.getModule("filesystem/impls/filer/lib/Sizes"),
         ViewCommandHandlers = brackets.getModule("view/ViewCommandHandlers"),
         SidebarView         = brackets.getModule("project/SidebarView"),
         WorkspaceManager    = brackets.getModule("view/WorkspaceManager"),
@@ -22,6 +23,8 @@ define(function (require, exports, module) {
     var Theme = require("lib/Theme");
 
     var isMobileViewOpen = false;
+
+    var DEFAULT_PROJECT_SIZE_LIMIT_FORMATTED = Sizes.formatBytes(Sizes.DEFAULT_PROJECT_SIZE_LIMIT);
 
     /**
      * This function calls all the hide functions and listens
@@ -287,6 +290,35 @@ define(function (require, exports, module) {
         return isMobileViewOpen ? "mobile" : "desktop";
     }
 
+    /**
+     * Update File Tree size info when the project's files changes on disk
+     */
+    function setProjectSizeInfo(info) {
+        var currentSize = Sizes.formatBytes(info.size);
+
+        // Normalize to between 0 - 100%
+        var percentUsed = (Math.max(Math.min(info.percentUsed * 100, 100), 0)).toFixed(2) + "%";
+
+        // TODO: update UI with progress bar and print X of Y strings to filetree.
+        console.log("setProjectSizeInfo", currentSize, DEFAULT_PROJECT_SIZE_LIMIT_FORMATTED, percentUsed);
+    }
+
+    /**
+     * When the project size on disk exceeds the allowed capacity, show a warning with info on what to do.
+     */
+    function addProjectSizeWarning() {
+        // TODO: update the file tree UI with some kind of warning and link to get info on what to do
+        console.log("addProjectSizeWarning");
+    }
+
+    /**
+     * When the project was previously over capacity, and now is within limits, remove the warning.
+     */
+    function removeProjectSizeWarning() {
+        // TODO: update the file tree UI to remove the size warning
+        console.log("removeProjectSizeWarning");
+    }
+
     // Define public API
     exports.initUI                 = initUI;
     exports.showMobileView         = showMobileView;
@@ -297,4 +329,7 @@ define(function (require, exports, module) {
     exports.removeLeftSideToolBar  = removeLeftSideToolBar;
     exports.removeMainToolBar      = removeMainToolBar;
     exports.removeRightSideToolBar = removeRightSideToolBar;
+    exports.setProjectSizeInfo     = setProjectSizeInfo;
+    exports.addProjectSizeWarning  = addProjectSizeWarning;
+    exports.removeProjectSizeWarning = removeProjectSizeWarning;
 });

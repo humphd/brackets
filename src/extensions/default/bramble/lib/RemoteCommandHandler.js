@@ -7,6 +7,7 @@ define(function (require, exports, module) {
     var CommandManager     = brackets.getModule("command/CommandManager");
     var EditorManager      = brackets.getModule("editor/EditorManager");
     var Commands           = brackets.getModule("command/Commands");
+    var FileSystem         = brackets.getModule("filesystem/FileSystem");
     var HTMLRewriter       = brackets.getModule("filesystem/impls/filer/lib/HTMLRewriter");
     var SidebarView        = brackets.getModule("project/SidebarView");
     var StatusBar          = brackets.getModule("widgets/StatusBar");
@@ -194,6 +195,17 @@ define(function (require, exports, module) {
         case "BRAMBLE_ADD_CODE_SNIPPET":
             skipCallback = true;
             CommandManager.execute("bramble.addCodeSnippet", args[0]).always(callback);
+            break;
+        case "ENABLE_PROJECT_CAPACITY_LIMITS":
+            FileSystem.setEnforceLimits(true);
+            UI.addProjectSizeWarning();
+            break;
+        case "DISABLE_PROJECT_CAPACITY_LIMITS":
+            FileSystem.setEnforceLimits(false);
+            UI.removeProjectSizeWarning();
+            break;
+        case "PROJECT_SIZE_CHANGE":
+            UI.setProjectSizeInfo(args[0]);
             break;
         default:
             console.log('[Bramble] unknown command:', command);
