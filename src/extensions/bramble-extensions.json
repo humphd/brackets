@@ -154,5 +154,13 @@
                 "src/extensions/default/brackets-show-whitespace/styles/main.css"
             ]
         }
+    },
+    {
+        "path": "extensions/extra/brackets-fonts-viewer",
+        "less":{
+            "dist/extensions/extra/brackets-fonts-viewer/styles/main.css": [
+                "src/extensions/extra/brackets-fonts-viewer/styles/main.less"
+            ]
+        }
     }
 ]
