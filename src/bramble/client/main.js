@@ -93,6 +93,8 @@ define([
         // When we hit the READY state, also trigger an event and pass instance up
         if (_readyState === Bramble.READY) {
             Bramble.trigger("ready", [_instance]);
+            // Send project size info into Brackets too.
+            _projectStats.checkCapacity();
         }
         // When we go into the ERROR state, also trigger an event and pass err
         else if (_readyState === Bramble.ERROR) {
@@ -229,6 +231,7 @@ define([
                     }]
                 });
             });
+
 
             _instance.mount(root, filename);
         });
