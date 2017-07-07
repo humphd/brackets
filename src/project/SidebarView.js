@@ -150,11 +150,15 @@ define(function (require, exports, module) {
     }
 
     // Updates the project size indicator UI
-    function _updateProjectSizeIndicator() {
-        var percent = Math.random() * 100;
-        console.log(Math.round(percent));
-        $projectSizeIndicator.find(".space-used-bar").css("width", percent + "%");
-        $projectSizeIndicator.find(".space-used").text((percent/100 * 3).toFixed(2));
+    function _updateProjectSizeIndicator(currentSize, maxSize, percent) {
+        if(parseInt(percent) > 80) {
+            $projectSizeIndicator.addClass("project-size-warning");
+        } else {
+            $projectSizeIndicator.removeClass("project-size-warning");
+        }
+        $projectSizeIndicator.find(".space-used-bar").css("width", percent);
+        $projectSizeIndicator.find(".space-used").text(currentSize);
+        $projectSizeIndicator.find(".max-project-size").text(maxSize);
     }
 
     /**
@@ -302,4 +306,5 @@ define(function (require, exports, module) {
     exports.hide        = hide;
     exports.isVisible   = isVisible;
     exports.resize      = resize;
+    exports._updateProjectSizeIndicator = _updateProjectSizeIndicator;
 });

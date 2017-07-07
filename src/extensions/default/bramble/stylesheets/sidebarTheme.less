@@ -33,6 +33,7 @@ div.working-set-option-btn[style] {
     font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+// Indicates used and available room in a project
 #project-size-info {
     padding: 12px 10px;
     background: rgba(0,0,0,.9);
@@ -47,11 +48,19 @@ div.working-set-option-btn[style] {
 
     .space-used-bar {
         border-radius: 2px;
-        width: 60%;
+        width: 0;
         background: rgba(27,134,78,.7);
         height: 100%;
         position: absolute;
         left: 0;
+        transition: width .2s ease-out;
+        transition-delay: .5s;
+    }
+
+    &.project-size-warning {
+        .space-used-bar {
+            background: rgba(197, 69, 14, .7);
+        }
     }
 
     .space-used-summary {

@@ -299,8 +299,7 @@ define(function (require, exports, module) {
         // Normalize to between 0 - 100%
         var percentUsed = (Math.max(Math.min(info.percentUsed * 100, 100), 0)).toFixed(2) + "%";
 
-        // TODO: update UI with progress bar and print X of Y strings to filetree.
-        console.log("setProjectSizeInfo", currentSize, DEFAULT_PROJECT_SIZE_LIMIT_FORMATTED, percentUsed);
+        SidebarView._updateProjectSizeIndicator(currentSize, DEFAULT_PROJECT_SIZE_LIMIT_FORMATTED, percentUsed);
     }
 
     /**
