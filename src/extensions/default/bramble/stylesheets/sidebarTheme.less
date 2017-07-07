@@ -33,6 +33,49 @@ div.working-set-option-btn[style] {
     font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+// Indicates used and available room in a project
+#project-size-info {
+    padding: 12px 10px;
+    background: rgba(0,0,0,.9);
+
+    .space-available {
+        background: rgba(255,255,255,.2);
+        position: relative;
+        height: 6px;
+        margin-bottom: 6px;
+        border-radius: 2px;
+    }
+
+    .space-used-bar {
+        border-radius: 2px;
+        width: 0;
+        background: rgba(27,134,78,.7);
+        height: 100%;
+        position: absolute;
+        left: 0;
+        transition: width .2s ease-out;
+        transition-delay: .5s;
+    }
+
+    &.project-size-warning {
+        .space-used-bar {
+            background: rgba(197, 69, 14, .7);
+        }
+    }
+
+    .space-used-summary {
+        color: rgba(255,255,255,.4);
+        font-family: "Open Sans";
+        margin: 0;
+
+        strong {
+            font-weight: 600;
+            color: inherit;
+            color: rgba(255,255,255,.5);
+        }
+    }
+}
+
 #project-files-container ul {
     padding: 0 !important;
 }
