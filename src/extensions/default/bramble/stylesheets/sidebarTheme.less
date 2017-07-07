@@ -36,10 +36,9 @@ div.working-set-option-btn[style] {
 // Indicates used and available room in a project
 #project-size-info {
     padding: 12px 10px;
-    background: rgba(0,0,0,.9);
 
     .space-available {
-        background: rgba(255,255,255,.2);
+        background: rgba(0,0,0,.1);
         position: relative;
         height: 6px;
         margin-bottom: 6px;
@@ -64,13 +63,38 @@ div.working-set-option-btn[style] {
     }
 
     .space-used-summary {
-        color: rgba(255,255,255,.4);
+        color: rgba(0,0,0,.4);
         font-family: "Open Sans";
         margin: 0;
 
         strong {
             font-weight: 600;
             color: inherit;
+            color: rgba(0,0,0,.5);
+        }
+    }
+}
+
+.dark #project-size-info {
+
+    .space-available {
+        background: rgba(255,255,255,.2);
+    }
+
+    .space-used-bar {
+        background: rgba(27,134,78,.7);
+    }
+
+    &.project-size-warning {
+        .space-used-bar {
+            background: rgba(197, 69, 14, .7);
+        }
+    }
+
+    .space-used-summary {
+        color: rgba(255,255,255,.4);
+
+        strong {
             color: rgba(255,255,255,.5);
         }
     }
