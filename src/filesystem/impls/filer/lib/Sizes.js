@@ -7,8 +7,8 @@ define(function (require, exports, module) {
 
     var UNITS = ['B', 'kB', 'MB'];
 
-    var KB = 1024;
-    var MB = 1024 * KB;
+    var KB = 1000;
+    var MB = 1000 * KB;
 
     // 5MB default size limit for total project size on disk
     var DEFAULT_PROJECT_SIZE_LIMIT = 5 * MB;
