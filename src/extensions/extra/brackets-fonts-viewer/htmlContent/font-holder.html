@@ -5,21 +5,57 @@
             src: url("{{{url}}}?ver={{now}}");
         }
     </style>
+
     <div class="font-centering">
+
         <div class="font-header">
-            <div class="font-data">&nbsp;</div>
-            <div class="font-path" title="{{relPath}}">{{relPath}}</div>
+            Font File<span class="divider">&bull;</span> <span class="font-data">&nbsp;</span>
         </div>
+
         <div class="font-display">
             ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
             abcdefghijklmnopqrstuvwxyz<br />
             0123456789<br />
-            &%$@#?+-*{}()[]<>
-
-            <div class="font-samples">
-                <p class="normal">The quick brown fox jumped over the lazy dog. (normal)</p>
-                <p class="italic">The quick brown fox jumped over the lazy dog. (italic)</p>
-                <p class="bold">The quick brown fox jumped over the lazy dog. (bold)</p>
+            &amp;%$@#?+-*{}()[]&lt;&gt;
         </div>
-    </div>
+
+        <div class="code-wrapper">
+            <h2 class="code-title">To use this font, copy and paste this code into your CSS file.</h2>
+            <pre>
+@font-face {
+  font-family: "{{fontName}}";
+  src: url("{{{relPath}}}");
+}
+
+p {
+  font-family: "{{fontName}}";
+}
+</pre>
+
+        </div>
+
+        <div class="font-samples">
+            <!--
+            <div class="sample">
+                <h3>Normal</h3>
+                <p class="normal">The quick brown fox jumped over the lazy dog.</p>
+            </div>
+            -->
+            <div class="sample">
+                <h3>Italic</h3>
+                <p class="italic">The quick brown fox jumped over the lazy dog.</p>
+                <ul>
+                    <li><strong>HTML</strong> &rarr; Put text inside <code>&lt;em&gt;</code><code>&lt;/em&gt;</code> tag.</li>
+                    <li><strong>CSS</strong> &rarr; Add a <code>font-style: italic;</code> rule.</li>
+                </ul>
+            </div>
+            <div class="sample">
+                <h3>Bold</h3>
+                <p class="bold">The quick brown fox jumped over the lazy dog.</p>
+                <ul>
+                    <li><strong>HTML</strong> &rarr; Put text inside <code>&lt;strong&gt;</code><code>&lt;/strong&gt;</code> tag.</li>
+                    <li><strong>CSS</strong> &rarr; Add a <code>font-weight: bold;</code> rule.</li>
+                </ul>
+            </div>
+        </div>
 </div>

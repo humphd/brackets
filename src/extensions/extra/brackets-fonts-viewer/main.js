@@ -43,6 +43,13 @@ define(function (require, exports, module) {
     /** @type {Array.<FontView>} */
     var _viewers = {};
 
+    // Get a name for this font for use in the CSS sample code
+    function _getFontName(file) {
+        var filename = file.name.substring(0, file.name.indexOf("."))
+        filename = filename.replace(/[^\w\s]/gi, '');
+        return filename;
+    }
+
     // Get a URL out of the cache
     function _getUrl(path) {
         return UrlCache.getUrl(path);
@@ -60,8 +67,10 @@ define(function (require, exports, module) {
         this.$el     = $(Mustache.render(FontHolderTemplate, {
             url      : _getUrl(this.file.fullPath),
             relPath  : this.relPath,
+            fontName : _getFontName(this.file),
             now      : new Date().valueOf()
         }));
+
 
         $container.append(this.$el);
 
