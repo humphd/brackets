@@ -179,14 +179,17 @@ define([
         // Monitor disk use and limit activity when we hit capacity.
         _projectStats.on("capacityStateChange", function(overCapacity, amountInBytes) {
             function fireOverCapacity() {
-                console.warn("[Bramble] project has exceeded maximum allowed capacity by " + Math.abs(amountInBytes)+ " bytes. Limiting disk activity until space is recovered.");
+                amountInBytes = Math.abs(amountInBytes);
+
+                console.warn("[Bramble] project has exceeded maximum allowed capacity by " + amountInBytes + " bytes. Limiting disk activity until space is recovered.");
 
                 _instance._executeRemoteCommand({
                     commandCategory: "bramble",
-                    command: "ENABLE_PROJECT_CAPACITY_LIMITS"
+                    command: "BRAMBLE_ENABLE_PROJECT_CAPACITY_LIMITS",
+                    args: [ amountInBytes ]
                 });
 
-                _instance.trigger("capacityExceeded", [Math.abs(amountInBytes)]);
+                _instance.trigger("capacityExceeded", [ amountInBytes ]);
             }
 
             function fireCapacityRestored() {
@@ -194,7 +197,7 @@ define([
 
                 _instance._executeRemoteCommand({
                     commandCategory: "bramble",
-                    command: "DISABLE_PROJECT_CAPACITY_LIMITS"
+                    command: "BRAMBLE_DISABLE_PROJECT_CAPACITY_LIMITS"
                 });
 
                 _instance.trigger("capacityRestored");
@@ -224,7 +227,7 @@ define([
 
                 _instance._executeRemoteCommand({
                     commandCategory: "bramble",
-                    command: "PROJECT_SIZE_CHANGE",
+                    command: "BRAMBLE_PROJECT_SIZE_CHANGE",
                     args: [{
                         size: size,
                         percentUsed: percentUsed

@@ -61,4 +61,16 @@ define(function (require, exports, module) {
     exports.RESIZED_IMAGE_TARGET_SIZE_KB = RESIZED_IMAGE_TARGET_SIZE_KB;
     exports.IMAGE_RESIZE_TOLERANCE_KB = IMAGE_RESIZE_TOLERANCE_KB;
     exports.formatBytes = formatBytes;
+
+    // We track whether or not to do certain filesystem operations based
+    // on how large a project is vs. the requested disk capacity.
+    var _enforceLimits = false;
+
+    exports.getEnforceLimits = function() {
+        return _enforceLimits;
+    };
+
+    exports.setEnforceLimits = function(value) {
+        _enforceLimits = value;
+    };
 });

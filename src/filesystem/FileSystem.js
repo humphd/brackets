@@ -1032,16 +1032,6 @@ define(function (require, exports, module) {
     // Export the FileSystem class as "private" for unit testing only.
     exports._FileSystem = FileSystem;
 
-    // XXXBramble: we track whether or not to do certain filesystem operations based
-    // on how large a project is vs. the requested disk capacity.
-    var _enforceLimits = false;
-    exports.getEnforceLimits = function() {
-        return _enforceLimits;
-    };
-    exports.setEnforceLimits = function(value) {
-        _enforceLimits = value;
-    };
-
     // Create the singleton instance
     _instance = new FileSystem();
 

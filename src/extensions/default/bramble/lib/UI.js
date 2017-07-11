@@ -11,12 +11,17 @@ define(function (require, exports, module) {
         MainViewManager     = brackets.getModule("view/MainViewManager"),
         BrambleEvents       = brackets.getModule("bramble/BrambleEvents"),
         BrambleStartupState = brackets.getModule("bramble/StartupState"),
+        CommandManager      = brackets.getModule("command/CommandManager"),
         FileSystem          = brackets.getModule("filesystem/FileSystem"),
         Sizes               = brackets.getModule("filesystem/impls/filer/lib/Sizes"),
         ViewCommandHandlers = brackets.getModule("view/ViewCommandHandlers"),
         SidebarView         = brackets.getModule("project/SidebarView"),
         WorkspaceManager    = brackets.getModule("view/WorkspaceManager"),
-        PreferencesManager  = brackets.getModule("preferences/PreferencesManager");
+        PreferencesManager  = brackets.getModule("preferences/PreferencesManager"),
+        Dialogs             = brackets.getModule("widgets/Dialogs"),
+        DefaultDialogs      = brackets.getModule("widgets/DefaultDialogs"),
+        Strings             = brackets.getModule("strings"),
+        StringUtils         = brackets.getModule("utils/StringUtils");
 
     var PhonePreview  = require("text!lib/Mobile.html");
     var PostMessageTransport = require("lib/PostMessageTransport");
@@ -303,20 +308,17 @@ define(function (require, exports, module) {
     }
 
     /**
-     * When the project size on disk exceeds the allowed capacity, show a warning with info on what to do.
+     * Show the user an error dialog, indicating that the project has exceeded the max amount of disk space.
      */
-    function addProjectSizeWarning() {
-        // TODO: update the file tree UI with some kind of warning and link to get info on what to do
-        console.log("addProjectSizeWarning");
+    function showProjectSizeErrorDialog() {
+        return Dialogs.showModalDialog(
+            DefaultDialogs.DIALOG_ID_ERROR,
+            Strings.ERROR_OUT_OF_SPACE_TITLE,
+            Strings.ERROR_PROJECT_SIZE_EXCEEDED
+        ).getPromise();
     }
 
-    /**
-     * When the project was previously over capacity, and now is within limits, remove the warning.
-     */
-    function removeProjectSizeWarning() {
-        // TODO: update the file tree UI to remove the size warning
-        console.log("removeProjectSizeWarning");
-    }
+    CommandManager.registerInternal("bramble.projectSizeError", showProjectSizeErrorDialog);
 
     // Define public API
     exports.initUI                 = initUI;
@@ -329,6 +331,4 @@ define(function (require, exports, module) {
     exports.removeMainToolBar      = removeMainToolBar;
     exports.removeRightSideToolBar = removeRightSideToolBar;
     exports.setProjectSizeInfo     = setProjectSizeInfo;
-    exports.addProjectSizeWarning  = addProjectSizeWarning;
-    exports.removeProjectSizeWarning = removeProjectSizeWarning;
 });

@@ -17,6 +17,7 @@ define(function (require, exports, module) {
     var PreferencesManager = brackets.getModule("preferences/PreferencesManager");
     var _                  = brackets.getModule("thirdparty/lodash");
     var ArchiveUtils       = brackets.getModule("filesystem/impls/filer/ArchiveUtils");
+    var Sizes              = brackets.getModule("filesystem/impls/filer/lib/Sizes");
 
     var SVGUtils = require("lib/SVGUtils");
     var MouseManager = require("lib/MouseManager");
@@ -181,7 +182,16 @@ define(function (require, exports, module) {
             break;
         case "BRAMBLE_ADD_NEW_FILE":
             skipCallback = true;
-            CommandManager.execute("bramble.addFile", args[0]).always(callback);
+            // Make sure we have enough room to add new files.
+            if(Sizes.getEnforceLimits()) {
+                CommandManager
+                    .execute("bramble.projectSizeError")
+                    .always(callback);
+            } else {
+                CommandManager
+                    .execute("bramble.addFile", args[0])
+                    .always(callback);
+            }
             break;
         case "BRAMBLE_EXPORT":
             skipCallback = true;
@@ -196,15 +206,15 @@ define(function (require, exports, module) {
             skipCallback = true;
             CommandManager.execute("bramble.addCodeSnippet", args[0]).always(callback);
             break;
-        case "ENABLE_PROJECT_CAPACITY_LIMITS":
-            FileSystem.setEnforceLimits(true);
-            UI.addProjectSizeWarning();
+        case "BRAMBLE_ENABLE_PROJECT_CAPACITY_LIMITS":
+            skipCallback = true;
+            Sizes.setEnforceLimits(true);
+            CommandManager.execute("bramble.projectSizeError").always(callback);
             break;
-        case "DISABLE_PROJECT_CAPACITY_LIMITS":
-            FileSystem.setEnforceLimits(false);
-            UI.removeProjectSizeWarning();
+        case "BRAMBLE_DISABLE_PROJECT_CAPACITY_LIMITS":
+            Sizes.setEnforceLimits(false);
             break;
-        case "PROJECT_SIZE_CHANGE":
+        case "BRAMBLE_PROJECT_SIZE_CHANGE":
             UI.setProjectSizeInfo(args[0]);
             break;
         default:
