@@ -151,12 +151,23 @@ define(function (require, exports, module) {
 
     // Updates the project size indicator UI
     function _updateProjectSizeIndicator(currentSize, maxSize, percent) {
-        if(parseInt(percent) > 80) {
-            $projectSizeIndicator.addClass("project-size-warning");
+        $projectSizeIndicator.removeClass("project-size-warning project-size-exceeded");
+
+        percent = parseInt(percent);
+        if(percent < 10) {
+            $projectSizeIndicator.addClass("hidden");
+            return;
         } else {
-            $projectSizeIndicator.removeClass("project-size-warning");
+            $projectSizeIndicator.removeClass("hidden");
         }
-        $projectSizeIndicator.find(".space-used-bar").css("width", percent);
+
+        if(percent > 80 && percent < 100) {
+            $projectSizeIndicator.addClass("project-size-warning");
+        } else if(percent === 100) {
+            $projectSizeIndicator.addClass("project-size-exceeded");
+        }
+
+        $projectSizeIndicator.find(".space-used-bar").css("width", percent + "%");
         $projectSizeIndicator.find(".space-used").text(currentSize);
         $projectSizeIndicator.find(".max-project-size").text(maxSize);
     }
