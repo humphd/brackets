@@ -1,15 +1,15 @@
-<div class="font-holder">
-    <style class="font-face" data-src="{{{url}}}?ver={{now}}">
-        @font-face {
-            font-family: "FontDisplay";
-            src: url("{{{url}}}?ver={{now}}");
-        }
-    </style>
+<style class="font-face" data-src="{{{url}}}?ver={{now}}">
+    @font-face {
+        font-family: "FontDisplay";
+        src: url("{{{url}}}?ver={{now}}");
+    }
+</style>
 
-    <div class="font-centering">
+<div class="font-viewer">
+    <div class="inner-content">
 
         <div class="font-header">
-            Font File<span class="divider">&bull;</span> <span class="font-data">&nbsp;</span>
+            {{ Strings.FONT_FILE }}<span class="divider">&bull;</span><span class="font-data">&nbsp;</span>
         </div>
 
         <div class="font-display">
@@ -20,7 +20,7 @@
         </div>
 
         <div class="code-wrapper">
-            <h2 class="code-title">To use this font, copy and paste this code into your CSS file.</h2>
+            <h2 class="code-title">{{ Strings.USE_FONT_INSTRUCTIONS }}</h2>
             <pre>
 @font-face {
   font-family: "{{fontName}}";
@@ -31,31 +31,30 @@ p {
   font-family: "{{fontName}}";
 }
 </pre>
-
         </div>
 
         <div class="font-samples">
-            <!--
             <div class="sample">
-                <h3>Normal</h3>
+                <h3>{{ Strings.FONT_TYPE_NORMAL }}</h3>
                 <p class="normal">The quick brown fox jumped over the lazy dog.</p>
             </div>
-            -->
             <div class="sample">
-                <h3>Italic</h3>
+                <h3>{{ Strings.FONT_TYPE_ITALIC }}</h3>
                 <p class="italic">The quick brown fox jumped over the lazy dog.</p>
-                <ul>
-                    <li><strong>HTML</strong> &rarr; Put text inside <code>&lt;em&gt;</code><code>&lt;/em&gt;</code> tag.</li>
-                    <li><strong>CSS</strong> &rarr; Add a <code>font-style: italic;</code> rule.</li>
+                <ul class="code-sample">
+                    <li><strong>HTML</strong> &rarr; {{{ Strings.FONT_BOLD_HTML_TAG }}}</li>
+                    <li><strong>CSS</strong> &rarr; {{{ Strings.FONT_BOLD_CSS_RULE }}}</li>
                 </ul>
             </div>
             <div class="sample">
-                <h3>Bold</h3>
+                <h3>{{ Strings.FONT_TYPE_BOLD }}</h3>
                 <p class="bold">The quick brown fox jumped over the lazy dog.</p>
-                <ul>
-                    <li><strong>HTML</strong> &rarr; Put text inside <code>&lt;strong&gt;</code><code>&lt;/strong&gt;</code> tag.</li>
-                    <li><strong>CSS</strong> &rarr; Add a <code>font-weight: bold;</code> rule.</li>
+                <ul class="code-sample">
+                    <li><strong>HTML</strong> &rarr; {{{ Strings.FONT_ITALIC_HTML_TAG }}}</li>
+                    <li><strong>CSS</strong> &rarr; {{{ Strings.FONT_ITALIC_CSS_RULE }}}</li>
                 </ul>
             </div>
         </div>
+
+    </div>
 </div>

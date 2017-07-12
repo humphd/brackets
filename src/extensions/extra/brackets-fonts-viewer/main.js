@@ -30,6 +30,7 @@ define(function (require, exports, module) {
     var AppInit            = brackets.getModule("utils/AppInit"),
         ExtensionUtils     = brackets.getModule("utils/ExtensionUtils"),
         StringUtils        = brackets.getModule("utils/StringUtils"),
+        Strings            = brackets.getModule("strings"),
         DocumentManager    = brackets.getModule("document/DocumentManager"),
         MainViewFactory    = brackets.getModule("view/MainViewFactory"),
         ProjectManager     = brackets.getModule("project/ProjectManager"),
@@ -68,7 +69,8 @@ define(function (require, exports, module) {
             url      : _getUrl(this.file.fullPath),
             relPath  : this.relPath,
             fontName : _getFontName(this.file),
-            now      : new Date().valueOf()
+            now      : new Date().valueOf(),
+            Strings  : Strings
         }));
 
 
