@@ -46,9 +46,7 @@ define(function (require, exports, module) {
 
     // Get a name for this font for use in the CSS sample code
     function _getFontName(file) {
-        var filename = file.name.substring(0, file.name.indexOf("."))
-        filename = filename.replace(/[^\w\s]/gi, '');
-        return filename;
+        return Path.basename(file.name).replace(Path.extname(file.name), "");
     }
 
     // Get a URL out of the cache
